@@ -1,12 +1,13 @@
 import React,{useEffect,useState} from 'react'
 import './App.css';
 import CurrencySelector from './Components/CurrencySelector';
+import NavBar from './Components/NavBar';
 
 const ENDPOINT ='https://api.apilayer.com/exchangerates_data/latest'
 const options = {method: 'GET', headers:{apikey: '4AQVAzG8vLgDqFvImylPxmAPJZxWGwIg'}}
 
 function App() {
-  const [currencyOption, setCurrencyOption] = useState([]);
+  const [currencyOption, setCurrencyOption] = useState(['EUR', 'USD','BRL']);
   const [fromCurrency, setFromCurrency] = useState('EUR');
   const [toCurrency, setToCurrency] = useState();
   const [amount, setAmount] = useState(1);
@@ -26,39 +27,40 @@ function App() {
   }
 
   useEffect(()=>{
-    fetch(ENDPOINT, options).then(response => response.json())
-    .then(jsonResponse => {
-      const firstCurrency = Object.keys(jsonResponse.rates)[0];
-      console.log('resposta: ', jsonResponse);
 
-      setCurrencyOption([...Object.keys(jsonResponse.rates)])
-      setFromCurrency(jsonResponse.base);
-      setToCurrency(firstCurrency);
-      setRateExchange(jsonResponse.rates[firstCurrency]);
+    // fetch(ENDPOINT, options).then(response => response.json())
+    // .then(jsonResponse => {
+    //   const firstCurrency = Object.keys(jsonResponse.rates)[0];
+    //   console.log('resposta: ', jsonResponse);
 
-    })
+    //   setCurrencyOption([...Object.keys(jsonResponse.rates)])
+    //   setFromCurrency(jsonResponse.base);
+    //   setToCurrency(firstCurrency);
+    //   setRateExchange(jsonResponse.rates[firstCurrency]);
+    // })
+    populateSelect();
 
   },[])
 
   // the following useEffect handles to choice of currency to convert from and to
   useEffect(()=>{
 
-    if(fromCurrency != undefined && toCurrency != undefined){
-      try{
-        let url = "https://api.apilayer.com/exchangerates_data/convert?to="+toCurrency+"&from="+fromCurrency+"&amount="+amount;
+    // if(fromCurrency != undefined && toCurrency != undefined){
+    //   try{
+    //     let url = "https://api.apilayer.com/exchangerates_data/convert?to="+toCurrency+"&from="+fromCurrency+"&amount="+amount;
       
-        fetch(url,{method: 'GET', headers:{apikey: '4AQVAzG8vLgDqFvImylPxmAPJZxWGwIg'}}
-    ).then(response => response.json())
-     .then(res => {
-      setRateExchange(res.result)
+    //     fetch(url,{method: 'GET', headers:{apikey: '4AQVAzG8vLgDqFvImylPxmAPJZxWGwIg'}}
+    // ).then(response => response.json())
+    //  .then(res => {
+    //   setRateExchange(res.result)
       
-          }) 
-      }
-      catch(error){
-        console.log(error);
-      }
+    //       }) 
+    //   }
+    //   catch(error){
+    //     console.log(error);
+    //   }
 
-    }
+    // }
 
   },[fromCurrency, toCurrency])
 
@@ -86,23 +88,33 @@ function App() {
     }
   }
 
+  function populateSelect(){
+    const select = document.getElementById('.currency-select');
+    console.log(select);
+  }
+
 
   return (
-    <div>
-      <h1> Currency Convertor</h1>
-      <div className = "main-container">
-      <h3> select a currency and a value to convert </h3>
+    <>
+    <NavBar />
+    <div className = "parent-container">
+      <h2> Select a currency and a value to convert </h2>
+      <div className = "select-container">
         <CurrencySelector selectedCurrency = {fromCurrency} options = {currencyOption}
         currencySelection ={event => setFromCurrency(event.target.value)} amount = {fromAmount}
         changeCurrencyAmount = {fromAmountChange}/>
-        <div>=</div>
+        <div className = "equal">=</div>
         <CurrencySelector selectedCurrency = {toCurrency} options = {currencyOption}
          currencySelection ={event => setToCurrency(event.target.value)} amount = {toAmount}
          changeCurrencyAmount = {toAmountChange}/>
-       
       </div>
     </div>
+
+    </>
   );
 }
 
 export default App;
+
+// to create the personalized div, i probably just need to change currencySelection to use the innerText of the div of the option selected
+//instead of using
