@@ -59,14 +59,18 @@ body{
   border-radius: 2rem;
   display: flex;
   padding: 2rem 1rem
-
 }
 
 .value-input{
   border: none;
+  style: none;
   border-radius: 1rem;
   margin-right: 1rem;
+  padding-left: 1.5rem;
   color: white;
+  background: rgba(0,50,0,0.2);
+  font-family: 'Verdana';
+  font-weight: bold;
 /*  background: green;*/
 }
 
@@ -81,30 +85,61 @@ margin: 0 1.5rem;
 
 }
 
+.currency-container{
+  display: flex;
+
+
+}
+
+
 /*  PERSONALISED SELECT ELEMENT */
+
+.selected-option{
+  background: #32cd32;
+  padding: .6rem;
+  border-radius: 1rem;
+}
+.selected-option:hover{
+  cursor: pointer;
+  background: #00ff00;
+}
 
 .currency-select{
   display: none;
 }
 
 .select-selected {
-  background-color: DodgerBlue;
+/*  position: relative;*/
+/*  left: 3rem;*/
+  background-color: #32cd32;
+/*  border-radius: 1rem;*/
+  margin-left: 0;
+  padding: 0;
+  border: none;
+  border-radius: 1rem;
+
 }
 
-/*style the arrow inside the select element:*/
-.select-selected:after {
-  position: absolute;
-  content: "";
-  top: 14px;
-  right: 10px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
+.select-selected:hover{
+  background-color: #00ff00;
 }
+
+.custom-select{
+  position: absolute;
+/*  left: 30rem;*/
+  margin-left: 15.5rem;
+  margin-top: 2.3rem;
+  background: #32cd32;
+  border-radius: 1rem;
+  max-height: 14rem;
+  overflow: scroll;
+  scrollbar-color: #00ff00 #32cd32;
+}
+
+
 
 /*point the arrow upwards when the select box is open (active):*/
-.select-selected.select-arrow-active:after {
+.selected-option.select-arrow-active:after {
   border-color: transparent transparent #fff transparent;
   top: 7px;
 }
@@ -122,7 +157,7 @@ margin: 0 1.5rem;
 /*style items (options):*/
 .select-items {
   position: absolute;
-  background-color: DodgerBlue;
+  background-color: green;
   top: 100%;
   left: 0;
   right: 0;
@@ -136,4 +171,27 @@ margin: 0 1.5rem;
 
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+/* ARROW ICON */
+
+.arrow {
+  margin-left: .5rem;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-top: 0;
+  margin-bottom: .25rem;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }

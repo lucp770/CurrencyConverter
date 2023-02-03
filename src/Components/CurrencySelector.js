@@ -9,8 +9,8 @@ function CurrencySelector(props){
 	useEffect(()=>{
 		console.log('loaded component');
 		//create the js code to populate the element.
-		console.log(selectObj.current);
-		createCurrencyList(selectObj.current);
+		// console.log(selectObj.current);
+		// createCurrencyList(selectObj.current);
 
 	},[])
 
@@ -25,7 +25,7 @@ function CurrencySelector(props){
 
 
 function checkKeyValid(e){
-let allowedKeys = ['0', '1', '2','3','4','5','6', '7', '8', '9', '.',',','Backspace'];
+let allowedKeys = ['0', '1', '2','3','4','5','6', '7', '8', '9', '.','Backspace'];
 	if (!allowedKeys.includes(e.key)){
 	
 		e.preventDefault();
@@ -52,17 +52,31 @@ function createCurrencyList(select){
 
 }
 
+function showHideOptions(){
+
+	let classes = selectDiv.current.classList;
+
+	if (classes.contains('select-hide')){
+		selectDiv.current.classList.remove('select-hide');
+	}
+	else{
+		selectDiv.current.classList.add('select-hide');
+	}
+}
+
 	return(
-		<>
-			<input className = "value-input" type ="number" value = {amount} onChange ={changeCurrencyAmount} onKeyDown = {e=>checkKeyValid(e)}/>
-			<div className = "custom-select" ref = {selectDiv}>
-				<select className ="currency-select" value={selectedCurrency} onChange = {currencySelection} ref={selectObj}>
+		<div className = "currency-container">
+			<input className = "value-input"  value = {amount} onChange ={changeCurrencyAmount} onKeyDown = {e=>checkKeyValid(e)}/>
+			<div className = 'selected-option' onClick = {showHideOptions}>{selectedCurrency} <i className="arrow down"></i></div>
+
+			<div className = "custom-select select-hide" ref = {selectDiv} onClick ={showHideOptions}>
 				{options.map(optionItem=> (
-					<option  className = "currency-option" key = {options.indexOf(optionItem)} value = {optionItem}>{optionItem}</option>
+					<div  className = "select-selected" key = {options.indexOf(optionItem)}  onClick ={currencySelection}>{optionItem}</div>
 				))}
-				</select>
+	
 			</div>
-		</>
+			
+		</div>
 		)
 }
 
