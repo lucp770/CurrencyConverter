@@ -1,3 +1,4 @@
+
 body{
   margin: 0;
   display: flex;
@@ -5,15 +6,13 @@ body{
   align-items: center;
   min-height: 100vh;
   text-align: center;
-
   background-image: linear-gradient(45deg, #fff700,#32cd32 )
 }
-
 
 /*NAVIGATION BAR*/
 
 .navigation{
-  position: fixed;
+  position: absolute;
   top:0;
   left: 0;
 
@@ -23,6 +22,8 @@ body{
 
 /*  border: 1px solid white;*/
   padding: 0;
+
+  min-width: 850px;
 }
 
 .main-title{
@@ -39,6 +40,7 @@ body{
 
 /*MAIN CONTAINER */
 
+
 .parent-container{
   background: transparent;
   display: flex;
@@ -52,9 +54,50 @@ body{
   padding-bottom: 5rem;
   background: rgba(0,100,0,0.3);
 
-
   color: white;
 }
+
+/*RESPONSIVE WIDTH*/
+@media screen and (max-width: 773px) {
+ 
+body{
+  display: block;
+}
+  .parent-container{
+    margin: 8rem 1rem;
+    min-width: 430px;
+  }
+
+.select-container{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.currency-container{
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+.equal{
+position: relative;
+right: 3rem;
+}
+
+}
+
+/*RESPONSIVE HEIGHT*/
+@media screen and (max-height: 446px) {
+  body{
+  display: block;
+}
+  .parent-container{
+    margin: 8rem 1rem;
+    min-width: 430px;
+  }
+
+  }
+
+
 .select-container{
   border-radius: 2rem;
   display: flex;
@@ -87,10 +130,7 @@ margin: 0 1.5rem;
 
 .currency-container{
   display: flex;
-
-
 }
-
 
 /*  PERSONALISED SELECT ELEMENT */
 

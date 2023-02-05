@@ -5,8 +5,10 @@ import NavBar from './Components/NavBar';
 import { Backdrop } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import env from "react-dotenv";
+
 const ENDPOINT ='https://api.apilayer.com/exchangerates_data/latest'
-const options = {method: 'GET', headers:{apikey: '4AQVAzG8vLgDqFvImylPxmAPJZxWGwIg'}}
+const options = {method: 'GET', headers:{apikey: env.API_KEY}}
 
 function App() {
   const [currencyOption, setCurrencyOption] = useState([]);
@@ -35,7 +37,6 @@ function App() {
       fetch(ENDPOINT, options).then(response => response.json())
       .then(jsonResponse => {
         const firstCurrency = Object.keys(jsonResponse.rates)[0];
-        console.log('resposta: ', jsonResponse);
 
         setCurrencyOption([...Object.keys(jsonResponse.rates)])
         setFromCurrency(jsonResponse.base);
@@ -55,16 +56,21 @@ function App() {
   // the following useEffect handles to choice of currency to convert from and to
   useEffect(()=>{
 
-    console.log('from: ',fromCurrency, '\n to: ', toCurrency);
+    // console.log('from: ',fromCurrency, '\n to: ', toCurrency);
     if(fromCurrency != undefined && toCurrency != undefined){
       try{
         let url = "https://api.apilayer.com/exchangerates_data/convert?to="+toCurrency+"&from="+fromCurrency+"&amount="+amount;
         // create loading screen
         setLoading(true);
-        fetch(url,{method: 'GET', headers:{apikey: '4AQVAzG8vLgDqFvImylPxmAPJZxWGwIg'}}
+        fetch(url,{method: 'GET', headers:{apikey: env.API_KEY}}
         ).then(response => response.json())
          .then(res => {
-          setRateExchange(res.result)
+          setRateExchange(res.info.rate);
+          // console.log('rate: ', res.info.rate)
+          // console.log('response', res);
+          // console.log('\n rate exchange: ', rateExchange);
+          
+          
         // remove the loading screen
           setLoading(false);
           }) 
@@ -74,7 +80,6 @@ function App() {
         alert('We are sorry! looks like the service is not working right now. \n Please try again latter');
         setLoading(false);
       }
-
     }
 
   },[fromCurrency, toCurrency])
@@ -118,5 +123,6 @@ function App() {
 
 export default App;
 
+// TODO: configure enviroment variables.
 // TODO: deploy project
 // TODO: Put advertisement in the site.
