@@ -57,7 +57,7 @@ function App() {
   useEffect(()=>{
 
     // console.log('from: ',fromCurrency, '\n to: ', toCurrency);
-    if(fromCurrency != undefined && toCurrency != undefined){
+    if(fromCurrency !== undefined && toCurrency !== undefined){
       try{
         let url = "https://api.apilayer.com/exchangerates_data/convert?to="+toCurrency+"&from="+fromCurrency+"&amount="+amount;
         // create loading screen
@@ -69,8 +69,8 @@ function App() {
           // console.log('rate: ', res.info.rate)
           // console.log('response', res);
           // console.log('\n rate exchange: ', rateExchange);
-          
-          
+
+
         // remove the loading screen
           setLoading(false);
           }) 
@@ -81,7 +81,7 @@ function App() {
         setLoading(false);
       }
     }
-
+    // eslint-disable-next-line
   },[fromCurrency, toCurrency])
 
   function fromAmountChange(event){

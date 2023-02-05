@@ -1,14 +1,11 @@
-import {React,useRef,useEffect} from 'react'
+import {React,useRef} from 'react'
 
 
 function CurrencySelector(props){
-	const selectObj = useRef();//useRef returns an object called current.
 	const selectDiv = useRef();
 	//by setting the ref to the select, in every render the same select is gonna be atributed the variable selectObj
 
 	const {selectedCurrency, options, currencySelection, amount,changeCurrencyAmount} = props;
-	let firstcoin = options[0];
-
 
 function checkKeyValid(e){
 let allowedKeys = ['0', '1', '2','3','4','5','6', '7', '8', '9', '.','Backspace'];
