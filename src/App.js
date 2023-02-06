@@ -5,10 +5,11 @@ import NavBar from './Components/NavBar';
 import { Backdrop } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import env from "react-dotenv";
+// import env from "react-dotenv";
 
 const ENDPOINT ='https://api.apilayer.com/exchangerates_data/latest'
-const options = {method: 'GET', headers:{apikey: env.API_KEY}}
+const options = {method: 'GET', headers:{apikey: process.env.REACT_APP_API_KEY}}
+
 
 function App() {
   const [currencyOption, setCurrencyOption] = useState([]);
@@ -62,7 +63,7 @@ function App() {
         let url = "https://api.apilayer.com/exchangerates_data/convert?to="+toCurrency+"&from="+fromCurrency+"&amount="+amount;
         // create loading screen
         setLoading(true);
-        fetch(url,{method: 'GET', headers:{apikey: env.API_KEY}}
+        fetch(url,{method: 'GET', headers:{apikey: process.env.REACT_APP_API_KEY}}
         ).then(response => response.json())
          .then(res => {
           setRateExchange(res.info.rate);
