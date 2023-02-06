@@ -1,6 +1,6 @@
 # Real Time Currency converter
 
-This is an application built in React Js, Material Ui and  using the exchange rates API.
+This is an application built in React Js  using Material Ui and the exchange rates API.
 
 The site is depployed in Netlify and can be accessed at the link: https://master--realtime-currency-converter.netlify.app/
 
