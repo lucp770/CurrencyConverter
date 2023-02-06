@@ -1,4 +1,4 @@
-#Real Time Currency converter
+# Real Time Currency converter
 
 This is an application built in React Js, Material Ui and  using the exchange rates API.
 
